@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<h1>{% block title %}Welcome!{% endblock %}</h1>
+<div class="d-flex p-2">
+    {% if session.username and session.session %}
+        <form action="{{ url_for('add_stories') }}">
+            <button class="btn btn-primary m-2" type="submit">Add tasks</button>
+        </form>
+        <form action="{{ url_for('change_cards') }}">
+            <button class="btn btn-primary m-2" type="submit">Change card configuration</button>
+        </form>
+        <form action="{{ url_for('start') }}">
+            <button class="btn btn-success m-2" type="submit">Start poker</button>
+        </form>
+        <form action="{{ url_for('export') }}">
+            <button class="btn btn-info m-2" type="submit">Export data</button>
+        </form>
+        <form action="{{ url_for('reset') }}">
+            <button class="btn btn-danger m-2" onclick="return confirm('Are you sure?')" type="submit">Reset</button>
+        </form>
+    {% elif session.session %}
+        <form action="{{ url_for('add_player') }}">
+            <button class="btn btn-primary m-2" type="submit">Register</button>
+        </form>
+    {% else %}
+        <form action="{{ url_for('create_session') }}">
+            <button class="btn btn-primary m-2" type="submit">Create session</button>
+        </form>
+        <form action="{{ url_for('join_session') }}">
+            <button class="btn btn-primary m-2" type="submit">Join session</button>
+        </form>
+    {% endif %}
+</div>
+
+{% if session.username and session.session %}
+    <h2>Players:</h2>
+    {% for player in players %}
+        {{ player }}<br>
+    {% endfor %}
+
+    <h2>Tasks:</h2>
+    {% for task in tasks %}
+        {{ task.description }}{% if task.votes|length > 0 %}: {{ task.votes.values()|sum/task.votes|length }}{% endif %}<br>
+    {% endfor %}
+
+    <h2>Card configuration:</h2>
+    {% for card, color in cards %}
+        <a class="btn btn-{{ color }} p-5">{{ card }}</a>
+    {% endfor %}
+{% endif %}
+{% endblock %}

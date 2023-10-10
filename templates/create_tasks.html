@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>{% block title %}Add Tasks{% endblock %}</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="tasks">Tasks (newline separated)</label>
+            <textarea class="form-control" name="tasks"></textarea>
+        </div>
+        <button class="btn btn-primary mt-2" type="submit">Submit!</button>
+    </form>
+{% endblock %}

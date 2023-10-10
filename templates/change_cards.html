@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>{% block title %}Change Cards{% endblock %}</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="cards">Cards (comma separated)</label><br>
+            <input name="cards" placeholder="1,2,3,5,8,13,20,40,100" />
+        </div>
+        <button class="btn btn-primary mt-2" type="submit">Submit!</button>
+    </form>
+{% endblock %}

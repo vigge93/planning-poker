@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>{% block title %}Round {{ id + 1 }}{% endblock %}</h1>
+<h2>Task: {{ task.description }}</h2>
+
+<div class="d-flex justify-content-around fixed-bottom mb-2">
+    {% for card, color in cards %}
+        <a href="{{ url_for('vote', task=id, points=card) }}" class="btn btn-{{ color }} p-5">{{ card }}</a>
+    {% endfor %}
+</div>
+{% endblock %}

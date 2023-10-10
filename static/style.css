@@ -1,0 +1,12 @@
+.content {
+    margin: 2em;
+}
+
+.flash,
+.flash > a {
+	margin: 1em 0;
+	padding: 1em;
+	background: var(--main-color);
+	border: 1px solid #b6171c;
+	color: white;
+}

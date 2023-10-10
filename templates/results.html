@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>{% block title %}Results round {{ id + 1 }}{% endblock %}</h1>
+<h2>Task: {{ task.description }}</h2>
+<h3>Players voted: {{ task.votes|length }}</h3>
+<h3>Average score: {% if task.votes|length > 0 %} {{ task.votes.values()|sum/task.votes|length }}{% else %}0{% endif %}</h3>
+<a class="btn btn-warning" href="{{ url_for('round', task=id) }}">Change vote</a>
+{% if has_next %}
+    <a class="btn btn-primary" href="{{ url_for('round', task=id + 1) }}">Next task</a>
+{% else %}
+    <a class="btn btn-primary" href="{{ url_for('index') }}">Return to overview</a>
+{% endif %}
+
+<script>
+    setTimeout(() => {
+        location.reload()
+    }, 5000)
+</script>
+<div class="fixed-bottom mb-2">
+<h3>Votes:</h3>
+{% for vote in task.votes %}
+    <h3>{{ vote }}: {{ task.votes[vote] }}</h3>
+{% endfor %}
+</div>
+{% endblock %}

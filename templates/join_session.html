@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>{% block title %}Join Session{% endblock %}</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="session">Session Token</label><br>
+            <input name="session" />
+        </div>
+        <button class="btn btn-primary mt-2" type="submit">Submit!</button>
+    </form>
+{% endblock %}
